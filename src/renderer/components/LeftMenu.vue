@@ -1,34 +1,37 @@
 <template>
   <el-menu default-active="1-4-1" class="left-side-menu" @open="handleOpen" @close="handleClose" @select="handleSelect" :collapse="isCollapse">
-    <el-submenu index="1">
+    <el-menu-item index="snippet">
+      <i class="el-icon-document"></i>
+      <span slot="title">代码片段</span>
+    </el-menu-item>
+    <el-menu-item index="term">
+      <i class="el-icon-edit"></i>
+      <span slot="title">命令终端</span>
+    </el-menu-item>
+    <el-menu-item index="tail">
+      <i class="el-icon-view"></i>
+      <span slot="title">日志监控</span>
+    </el-menu-item>
+    <el-submenu index="tool">
       <template slot="title">
-        <i class="el-icon-location"></i>
-        <span slot="title">导航一</span>
+        <i class="el-icon-menu"></i>
+        <span slot="title">常用工具</span>
       </template>
-      <el-menu-item-group>
-        <span slot="title">分组一</span>
-        <el-menu-item index="1-1">选项1</el-menu-item>
-        <el-menu-item index="1-2">选项2</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="分组2">
-        <el-menu-item index="1-3">选项3</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="1-4">
-        <span slot="title">选项4</span>
-        <el-menu-item index="1-4-1">选项1</el-menu-item>
+      <el-submenu index="str">
+        <span slot="title">文本处理</span>
+        <el-menu-item index="str-encode">加密解密</el-menu-item>
+        <el-menu-item index="str-diff">文本比较</el-menu-item>
+        <el-menu-item index="str-qrcode">二维码生成</el-menu-item>
+        <el-menu-item index="str-bejson">JSON校验</el-menu-item>
+      </el-submenu>
+      <el-submenu index="sys">
+        <span slot="title">系统相关</span>
+        <el-menu-item index="sys-portscan">端口扫描</el-menu-item>
       </el-submenu>
     </el-submenu>
-    <el-menu-item index="2">
-      <i class="el-icon-menu"></i>
-      <span slot="title">导航二</span>
-    </el-menu-item>
-    <el-menu-item index="3" disabled>
-      <i class="el-icon-document"></i>
-      <span slot="title">导航三</span>
-    </el-menu-item>
-    <el-menu-item index="4">
+    <el-menu-item index="setting">
       <i class="el-icon-setting"></i>
-      <span slot="title">导航四</span>
+      <span slot="title">系统设置</span>
     </el-menu-item>
   </el-menu>
 </template>
@@ -48,6 +51,7 @@
         console.log(key, keyPath)
       },
       handleSelect (key, keyPath) {
+        this.$store.dispatch('setNav', key)
         console.log(key, keyPath)
       }
     }
@@ -57,6 +61,7 @@
 <style>
 .left-side-menu {
   height: 100vh;
-  max-width: 201px;
+  min-width: 201px;
+  /* overflow: auto; */
 }
 </style>

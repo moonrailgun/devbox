@@ -26,17 +26,25 @@
         </div>
       </div>
     </main> -->
-    <LeftMenu></LeftMenu>
+    <el-container>
+      <el-aside width="201px">
+        <LeftMenu></LeftMenu>
+      </el-aside>
+      <el-main>
+        <MainView></MainView>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
   import LeftMenu from './LeftMenu'
+  import MainView from './MainView'
 
   export default {
     name: 'landing-page',
-    components: { SystemInformation, LeftMenu },
+    components: { SystemInformation, LeftMenu, MainView },
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
@@ -67,7 +75,7 @@
     /* padding: 60px 80px; */
     width: 100vw;
   }
-
+/*
   #logo {
     height: auto;
     margin-bottom: 20px;
@@ -126,5 +134,5 @@
   .doc button.alt {
     color: #42b983;
     background-color: transparent;
-  }
+  } */
 </style>
