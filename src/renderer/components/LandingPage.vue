@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
+    <!-- <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
     <main>
       <div class="left-side">
         <span class="title">
@@ -25,16 +25,18 @@
           <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
         </div>
       </div>
-    </main>
+    </main> -->
+    <LeftMenu></LeftMenu>
   </div>
 </template>
 
 <script>
   import SystemInformation from './LandingPage/SystemInformation'
+  import LeftMenu from './LeftMenu'
 
   export default {
     name: 'landing-page',
-    components: { SystemInformation },
+    components: { SystemInformation, LeftMenu },
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
@@ -62,7 +64,7 @@
         rgba(229, 229, 229, .9) 100%
       );
     height: 100vh;
-    padding: 60px 80px;
+    /* padding: 60px 80px; */
     width: 100vw;
   }
 
