@@ -9,6 +9,7 @@
     <Tail v-show="curNav === 'tail'" />
     <StrEncode v-show="curNav === 'str-encode'" />
     <StrDiff v-show="curNav === 'str-diff'" />
+    <SysPortScan v-show="curNav === 'sys-portscan'" />
     <Settings v-show="curNav === 'settings'" />
   </div>
 </template>
@@ -17,11 +18,12 @@
   import { mapState } from 'vuex'
   import StrEncode from './View/Str/StrEncode'
   import StrDiff from './View/Str/StrDiff'
+  import SysPortScan from './View/Sys/SysPortScan'
   import Tail from './View/Tail'
   import Settings from './View/Settings'
 
   export default {
-    components: { StrEncode, StrDiff, Tail, Settings },
+    components: { StrEncode, StrDiff, SysPortScan, Tail, Settings },
     computed: {
       ...mapState({
         curNav: state => state.Nav.curNav
