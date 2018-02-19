@@ -25,10 +25,10 @@
           <el-button size="small" type="primary">选择日志文件</el-button>
           <div slot="tip" class="el-upload__tip">请选择能使用文本形式能够正常打开的文件</div>
         </el-upload>
-        <el-row style="margin-bottom: 10px;">
+        <el-row style="margin-top: 10px;">
           <el-button size="small" type="primary" @click="watch()" :disabled="isWatching">开始监听</el-button>
         </el-row>
-        <el-row>
+        <el-row style="margin-top: 10px;">
           <el-button size="small" @click="unwatch()" :disabled="!isWatching">停止监听</el-button>
         </el-row>
         <div class="buffer-action">
