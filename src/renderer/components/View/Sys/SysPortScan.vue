@@ -20,7 +20,7 @@
 
 <script>
   import { ipcRenderer } from 'electron'
-  let portsDesc = require(__static + '/ports.json')
+  let portsDesc = {}
 
   export default {
     data () {
@@ -34,6 +34,8 @@
       }
     },
     mounted () {
+      portsDesc = require(__static + '/ports.json')
+
       ipcRenderer.on('port-scan-finished', (event, host, ports) => {
         console.log('扫描完成', host, ports)
         this.$message({
