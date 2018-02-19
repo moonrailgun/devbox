@@ -41,60 +41,60 @@
 </template>
 
 <script>
-import { ipcRenderer } from 'electron'
+  import { ipcRenderer } from 'electron'
 
-export default {
-  data () {
-    return {
-      fileList: [],
-      isWatching: false,
-      lines: 0
-    }
-  },
-  mounted () {
-    let logsDOM = this.$refs.logs
-    let tableDOM = logsDOM.parentNode
-    ipcRenderer.on('tail-file-log', (event, name, message) => {
-      this.$set(this.$data, 'lines', this.lines + 1)
-      logsDOM.innerHTML += `<tr><td class="from" data-from='${name}'></td><td><pre>${message}</pre></td></tr>`
-      tableDOM.scrollTop = tableDOM.scrollHeight
-    })
-  },
-  methods: {
-    watch () {
-      console.log('开始监听')
-      ipcRenderer.send('tail-file-watch', this.logfilePath)
-      this.$set(this.$data, 'isWatching', true)
+  export default {
+    data () {
+      return {
+        fileList: [],
+        isWatching: false,
+        lines: 0
+      }
     },
-    unwatch () {
-      console.log('停止监听')
-      ipcRenderer.send('tail-file-unwatch', this.logfilePath)
-      this.$set(this.$data, 'isWatching', false)
+    mounted () {
+      let logsDOM = this.$refs.logs
+      let tableDOM = logsDOM.parentNode
+      ipcRenderer.on('tail-file-log', (event, name, message) => {
+        this.$set(this.$data, 'lines', this.lines + 1)
+        logsDOM.innerHTML += `<tr><td class="from" data-from='${name}'></td><td><pre>${message}</pre></td></tr>`
+        tableDOM.scrollTop = tableDOM.scrollHeight
+      })
     },
-    clear () {
-      this.$refs.logs.innerHTML = ''
-      this.$set(this.$data, 'lines', 0)
-    },
-    handleChange (file, fileList) {
-      ipcRenderer.send('tail-file-update', fileList.map(item => ({
-        name: item.name,
-        path: item.raw.path
-      })))
-    },
-    handleRemove (file, fileList) {
-      console.log(file, fileList)
-    },
-    handlePreview (file) {
-      console.log(file)
-    },
-    handleExceed (files, fileList) {
-      this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
-    },
-    beforeRemove (file, fileList) {
-      return !this.isWatching // this.$confirm(`确定移除 ${file.name}？`)
+    methods: {
+      watch () {
+        console.log('开始监听')
+        ipcRenderer.send('tail-file-watch', this.logfilePath)
+        this.$set(this.$data, 'isWatching', true)
+      },
+      unwatch () {
+        console.log('停止监听')
+        ipcRenderer.send('tail-file-unwatch', this.logfilePath)
+        this.$set(this.$data, 'isWatching', false)
+      },
+      clear () {
+        this.$refs.logs.innerHTML = ''
+        this.$set(this.$data, 'lines', 0)
+      },
+      handleChange (file, fileList) {
+        ipcRenderer.send('tail-file-update', fileList.map(item => ({
+          name: item.name,
+          path: item.raw.path
+        })))
+      },
+      handleRemove (file, fileList) {
+        console.log(file, fileList)
+      },
+      handlePreview (file) {
+        console.log(file)
+      },
+      handleExceed (files, fileList) {
+        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
+      },
+      beforeRemove (file, fileList) {
+        return !this.isWatching // this.$confirm(`确定移除 ${file.name}？`)
+      }
     }
   }
-}
 </script>
 
 <style>

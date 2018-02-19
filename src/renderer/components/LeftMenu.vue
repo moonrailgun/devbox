@@ -29,7 +29,7 @@
         <el-menu-item index="sys-portscan">端口扫描</el-menu-item>
       </el-submenu>
     </el-submenu>
-    <el-menu-item index="setting">
+    <el-menu-item index="settings">
       <i class="el-icon-setting"></i>
       <span slot="title">系统设置</span>
     </el-menu-item>

@@ -9,6 +9,7 @@
     <Tail v-show="curNav === 'tail'" />
     <StrEncode v-show="curNav === 'str-encode'" />
     <StrDiff v-show="curNav === 'str-diff'" />
+    <Settings v-show="curNav === 'settings'" />
   </div>
 </template>
 
@@ -17,9 +18,10 @@
   import StrEncode from './View/Str/StrEncode'
   import StrDiff from './View/Str/StrDiff'
   import Tail from './View/Tail'
+  import Settings from './View/Settings'
 
   export default {
-    components: { StrEncode, StrDiff, Tail },
+    components: { StrEncode, StrDiff, Tail, Settings },
     computed: {
       ...mapState({
         curNav: state => state.Nav.curNav
@@ -30,7 +32,6 @@
 
 <style>
 .main-view {
-  min-height: 100%;
   width: 100%;
 }
 </style>
