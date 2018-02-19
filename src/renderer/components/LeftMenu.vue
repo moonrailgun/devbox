@@ -64,4 +64,8 @@
   min-width: 201px;
   /* overflow: auto; */
 }
+
+.left-side-menu * {
+  user-select: none;
+}
 </style>

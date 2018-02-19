@@ -61,8 +61,6 @@ export default {
 
 <style>
 .diff-container {
-  height: 320px;
-  overflow: auto;
   margin-top: 10px;
 }
 

@@ -47,6 +47,8 @@ app.on('activate', () => {
   }
 })
 
+require('./event/tail')
+
 /**
  * Auto Updater
  *

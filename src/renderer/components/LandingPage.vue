@@ -75,6 +75,15 @@
     /* padding: 60px 80px; */
     width: 100vw;
   }
+
+  .el-container {
+    height: 100%;
+  }
+
+  .el-aside {
+    min-width: 201px;
+    width: 201px;
+  }
 /*
   #logo {
     height: auto;
