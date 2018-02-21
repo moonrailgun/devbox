@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import diffview from '../../../../../static/lib/diffview'
-import difflib from '../../../../../static/lib/difflib'
+import diffview from '../../../utils/diffview'
+import difflib from '../../../utils/difflib'
 
 export default {
   data () {
