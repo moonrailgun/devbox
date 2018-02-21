@@ -12,6 +12,10 @@
       <i class="el-icon-view"></i>
       <span slot="title">日志监控</span>
     </el-menu-item>
+    <el-menu-item index="http">
+      <i class="el-icon-share"></i>
+      <span slot="title">网络请求</span>
+    </el-menu-item>
     <el-submenu index="tool">
       <template slot="title">
         <i class="el-icon-menu"></i>

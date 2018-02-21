@@ -17,6 +17,36 @@
 
       <el-row :gutter="10">
         <el-col :span="12">
+          <el-form-item label="Unicode编码">
+            <i class="copy-btn el-icon-document" @click="copy(unicodeEncodeText)"></i>
+            <el-input type="textarea" v-model="unicodeEncodeText" disabled></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="Unicode解码">
+            <i class="copy-btn el-icon-document" @click="copy(unicodeDecodeText)"></i>
+            <el-input type="textarea" v-model="unicodeDecodeText" disabled></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+
+      <el-row :gutter="10">
+        <el-col :span="12">
+          <el-form-item label="UTF-8编码">
+            <i class="copy-btn el-icon-document" @click="copy(utf8EncodeText)"></i>
+            <el-input type="textarea" v-model="utf8EncodeText" disabled></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="UTF-8解码">
+            <i class="copy-btn el-icon-document" @click="copy(utf8DecodeText)"></i>
+            <el-input type="textarea" v-model="utf8DecodeText" disabled></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+
+      <el-row :gutter="10">
+        <el-col :span="12">
           <el-form-item label="Base64编码">
             <i class="copy-btn el-icon-document" @click="copy(base64EncodeText)"></i>
             <el-input type="textarea" v-model="base64EncodeText" disabled></el-input>
@@ -67,6 +97,36 @@
   import CryptoJS from 'crypto-js'
   import { clipboard } from 'electron'
 
+  let encodeUnicode = function (str) {
+    var res = []
+    for (var i = 0; i < str.length; i++) {
+      res[i] = ('00' + str.charCodeAt(i).toString(16)).slice(-4)
+    }
+    return '\\u' + res.join('\\u')
+  }
+
+  let decodeUnicode = function (str) {
+    return str.replace(/(\\u)(\w{4}|\w{2})/gi, function ($0, $1, $2) {
+      return String.fromCharCode(parseInt($2, 16))
+    })
+  }
+
+  let encodeUtf8 = function encodeUtf8 (str) {
+    let temp = ''
+    let rs = ''
+    for (let i = 0, len = str.length; i < len; i++) {
+      temp = str.charCodeAt(i).toString(16)
+      rs += '&#x' + new Array(5 - temp.length).join('0') + temp + ';'
+    }
+    return rs
+  }
+
+  let decodeUtf8 = function decodeUtf8 (str) {
+    return str.replace(/(&#x)(\w{4}|\w{2});/gi, function ($0, $1, $2) {
+      return String.fromCharCode(parseInt($2, 16))
+    })
+  }
+
   export default {
     data () {
       return {
@@ -75,6 +135,18 @@
       }
     },
     computed: {
+      unicodeEncodeText () {
+        return this.oriText && encodeUnicode(this.oriText)
+      },
+      unicodeDecodeText () {
+        return this.oriText && decodeUnicode(this.oriText)
+      },
+      utf8EncodeText () {
+        return this.oriText && encodeUtf8(this.oriText).toString()
+      },
+      utf8DecodeText () {
+        return this.oriText && decodeUtf8(this.oriText).toString()
+      },
       base64EncodeText () {
         return this.oriText && Buffer.from(this.oriText).toString('base64')
       },
