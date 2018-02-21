@@ -66,7 +66,7 @@
 
 <style>
 .left-side-menu {
-  height: 100vh;
+  min-height: 100%;
   min-width: 201px;
   /* overflow: auto; */
 }
