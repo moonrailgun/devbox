@@ -7,6 +7,7 @@
       终端
     </div>
     <Tail v-show="curNav === 'tail'" />
+    <Doc v-show="curNav === 'doc'" />
     <StrEncode v-show="curNav === 'str-encode'" />
     <StrDiff v-show="curNav === 'str-diff'" />
     <StrQrcode v-show="curNav === 'str-qrcode'" />
@@ -22,6 +23,7 @@
   import StrQrcode from './View/Str/StrQrcode'
   import SysPortScan from './View/Sys/SysPortScan'
   import Tail from './View/Tail'
+  import Doc from './View/Doc'
   import Settings from './View/Settings'
 
   export default {
@@ -31,6 +33,7 @@
       StrQrcode,
       SysPortScan,
       Tail,
+      Doc,
       Settings
     },
     computed: {
@@ -44,5 +47,6 @@
 <style>
 .main-view {
   width: 100%;
+  min-height: 100%;
 }
 </style>

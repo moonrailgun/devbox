@@ -21,6 +21,8 @@
         <i class="el-icon-menu"></i>
         <span slot="title">常用工具</span>
       </template>
+      <el-menu-item index="doc">文档速查</el-menu-item>
+      <el-menu-item index="color-card">取色卡</el-menu-item>
       <el-submenu index="str">
         <span slot="title">文本处理</span>
         <el-menu-item index="str-encode">加密解密</el-menu-item>
