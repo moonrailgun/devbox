@@ -1,8 +1,6 @@
 <template>
   <div class="main-view">
-    <div v-show="curNav === 'snippet'">
-      代码片段
-    </div>
+    <CodeSnippet v-show="curNav === 'snippet'" />
     <SSHEmulator v-if="curNav === 'term'" />
     <Tail v-show="curNav === 'tail'" />
     <Doc v-show="curNav === 'doc'" />
@@ -17,6 +15,7 @@
 
 <script>
   import { mapState } from 'vuex'
+  import CodeSnippet from './View/CodeSnippet'
   import StrEncode from './View/Str/StrEncode'
   import StrDiff from './View/Str/StrDiff'
   import StrQrcode from './View/Str/StrQrcode'
@@ -29,6 +28,7 @@
 
   export default {
     components: {
+      CodeSnippet,
       StrEncode,
       StrDiff,
       StrQrcode,
