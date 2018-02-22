@@ -3,9 +3,7 @@
     <div v-show="curNav === 'snippet'">
       代码片段
     </div>
-    <div v-show="curNav === 'term'">
-      终端
-    </div>
+    <SSHEmulator v-if="curNav === 'term'" />
     <Tail v-show="curNav === 'tail'" />
     <Doc v-show="curNav === 'doc'" />
     <StrEncode v-show="curNav === 'str-encode'" />
@@ -25,6 +23,7 @@
   import StrBejson from './View/Str/StrBejson'
   import SysPortScan from './View/Sys/SysPortScan'
   import Tail from './View/Tail'
+  import SSHEmulator from './View/SSHEmulator'
   import Doc from './View/Doc'
   import Settings from './View/Settings'
 
@@ -36,6 +35,7 @@
       StrBejson,
       SysPortScan,
       Tail,
+      SSHEmulator,
       Doc,
       Settings
     },

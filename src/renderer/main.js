@@ -7,6 +7,9 @@ import VueCodemirror from 'vue-codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript.js'
 
+import 'xterm/dist/xterm.js'
+import 'xterm/dist/xterm.css'
+
 import App from './App'
 import router from './router'
 import store from './store'
