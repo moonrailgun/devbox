@@ -1,5 +1,5 @@
 <template>
-  <el-menu default-active="1-4-1" class="left-side-menu" @open="handleOpen" @close="handleClose" @select="handleSelect" :collapse="isCollapse">
+  <el-menu default-active="1-4-1" class="left-side-menu" @open="handleOpen" @close="handleClose" @select="handleSelect" :collapse="menuCollapse">
     <el-menu-item index="snippet">
       <i class="el-icon-document"></i>
       <span slot="title">代码片段</span>
@@ -43,11 +43,13 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
-    data () {
-      return {
-        isCollapse: false
-      }
+    computed: {
+      ...mapState({
+        menuCollapse: state => state.Settings.settings.menuCollapse || false
+      })
     },
     methods: {
       handleOpen (key, keyPath) {
@@ -67,7 +69,8 @@
 <style>
 .left-side-menu {
   min-height: 100%;
-  min-width: 201px;
+  /* min-width: 201px; */
+  min-width: 100%;
   /* overflow: auto; */
 }
 

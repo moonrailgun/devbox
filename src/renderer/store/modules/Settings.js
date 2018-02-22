@@ -14,8 +14,13 @@ const actions = {
   }
 }
 
+const getters = {
+  asideWidth: state => state.settings.menuCollapse ? 64 : 201
+}
+
 export default {
   state,
+  getters,
   mutations,
   actions
 }

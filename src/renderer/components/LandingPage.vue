@@ -27,7 +27,7 @@
       </div>
     </main> -->
     <el-container>
-      <el-aside width="201px">
+      <el-aside :width="asideWidth + 'px'" :style="{minWidth: asideWidth + 'px', width: asideWidth + 'px'}">
         <LeftMenu></LeftMenu>
       </el-aside>
       <el-main>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import SystemInformation from './LandingPage/SystemInformation'
   import LeftMenu from './LeftMenu'
   import MainView from './MainView'
@@ -45,6 +46,9 @@
   export default {
     name: 'landing-page',
     components: { SystemInformation, LeftMenu, MainView },
+    computed: {
+      ...mapGetters(['asideWidth'])
+    },
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)
@@ -80,10 +84,10 @@
     height: 100%;
   }
 
-  .el-aside {
+  /* .el-aside {
     min-width: 201px;
     width: 201px;
-  }
+  } */
 /*
   #logo {
     height: auto;
