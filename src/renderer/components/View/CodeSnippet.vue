@@ -7,7 +7,7 @@
       <span slot="title" class="snippet-editing-title">
         <el-input v-model="editingName" placeholder="请输入片段名"></el-input>
       </span>
-      <codemirror class="container" v-model="editingCode" :options="cmOptions"></codemirror>
+      <codemirror class="container" v-model="editingCode" :options="cmOptions" ref="code"></codemirror>
       <span slot="footer">
         <el-button type="primary" @click="save()">保 存</el-button>
       </span>
@@ -15,7 +15,7 @@
 
     <el-row :gutter="5">
       <el-card :body-style="{ padding: '0px' }" v-for="snippet in snippets" :key="snippet.id">
-        <div class="snippet-screenshot" :style="{backgroundImage: 'url(http://element-cn.eleme.io/static/hamburger.50e4091.png)'}">
+        <div class="snippet-screenshot" :style="{backgroundImage: 'url('+snippet.image+')'}">
           <span>{{snippet.language}}</span>
         </div>
         <div style="padding: 14px;">
@@ -42,6 +42,7 @@
 
 <script>
   import { clipboard } from 'electron'
+  import html2canvas from 'html2canvas'
 
   export default {
     data () {
@@ -77,11 +78,14 @@
         this.editingName = name
         this.dialogVisible = true
       },
-      save () {
+      async save () {
         if (!this.editingName) {
           this.$message.error('请输入片段名')
           return
         }
+
+        let canvas = await html2canvas(this.$refs.code.$el)
+        let image = canvas.toDataURL('image/jpeg')
 
         if (!this.editingId) {
           let pkg = {
@@ -89,6 +93,7 @@
             name: this.editingName,
             time: JSON.stringify(new Date()).substr(1, 10),
             code: this.editingCode,
+            image,
             language: 'javascript'// TODO
           }
           this.snippets.push(pkg)
@@ -96,6 +101,7 @@
           let snippet = this.snippets.find(i => i.id === this.editingId)
           snippet.name = this.editingName
           snippet.code = this.editingCode
+          snippet.image = image
           snippet.time = JSON.stringify(new Date()).substr(1, 10)
         }
         this.dialogVisible = false
