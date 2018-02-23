@@ -17,10 +17,8 @@
       return {
         cmOptions: {
           tabSize: 2,
-          // theme: 'base16-dark',
           lineNumbers: true,
           line: true,
-          lineWrapping: true,
           mode: {name: 'javascript', json: true}
         },
         jsonVal: '',
