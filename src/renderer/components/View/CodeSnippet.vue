@@ -64,7 +64,7 @@
     mounted () {
       this.$db.findOne({system: 'codeSnippet'}, (err, data) => {
         if (!err) {
-          if (!!data) {
+          if (data) {
             this.snippetIndex = data.snippetIndex
             this.snippets = data.snippets
           }
