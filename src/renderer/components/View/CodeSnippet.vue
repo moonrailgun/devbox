@@ -53,19 +53,23 @@
           line: true,
           mode: {name: 'javascript', json: true}
         },
-        snippets: [{
-          id: 1,
-          name: '简单代码示例',
-          time: JSON.stringify(new Date()).substr(1, 10),
-          code: 'var a = 1;\nvar b = 2;\nconsole.log(a, b);',
-          language: 'javascript'
-        }],
-        snippetIndex: 1,
+        snippets: [],
+        snippetIndex: 0,
         editingId: null,
         editingCode: '',
         editingName: '',
         dialogVisible: false
       }
+    },
+    mounted () {
+      this.$db.findOne({system: 'codeSnippet'}, (err, data) => {
+        if (!err) {
+          if (!!data) {
+            this.snippetIndex = data.snippetIndex
+            this.snippets = data.snippets
+          }
+        }
+      })
     },
     methods: {
       copy (code) {
@@ -105,10 +109,12 @@
           snippet.time = JSON.stringify(new Date()).substr(1, 10)
         }
         this.dialogVisible = false
+        this.syncToDb()
       },
       remove (id) {
         let index = this.snippets.findIndex(i => i.id === id)
         this.snippets.splice(index, 1)
+        this.syncToDb()
       },
       handleClose (done) {
         this.$confirm('确认关闭？')
@@ -116,6 +122,42 @@
             done()
           })
           .catch(_ => {})
+      },
+      syncToDb () {
+        this.$db.findOne({
+          system: 'codeSnippet'
+        }, (err, ret) => {
+          if (!err) {
+            if (ret) {
+              // 更新数据
+              this.$db.update({
+                system: 'codeSnippet'
+              }, {
+                snippets: this.snippets,
+                snippetIndex: this.snippetIndex
+              }, (err, ret) => {
+                if (err) {
+                  console.error(err)
+                } else {
+                  this.$message.success('同步到数据库完毕')
+                }
+              })
+            } else {
+              // 插入数据库
+              this.$db.insert({
+                system: 'codeSnippet',
+                snippets: this.snippets,
+                snippetIndex: this.snippetIndex
+              }, (err, ret) => {
+                if (err) {
+                  console.error(err)
+                } else {
+                  this.$message.success('同步到数据库完毕')
+                }
+              })
+            }
+          }
+        })
       }
     }
   }
