@@ -71,6 +71,7 @@
 <style>
 .terminal-container{
   min-height: calc(100vh - 40px);
+  max-height: calc(100vh - 40px);
   overflow: auto;
   /* min-height: 100%; */
   display: flex;
