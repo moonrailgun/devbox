@@ -80,9 +80,12 @@
 
 .terminal.xterm {
   padding: 10px;
+  flex: 1;
 }
 
 .ssh-terminal {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 </style>
