@@ -4,6 +4,7 @@
     <SSHEmulator v-if="curNav === 'term'" />
     <Tail v-show="curNav === 'tail'" />
     <Doc v-show="curNav === 'doc'" />
+    <ColorCard v-show="curNav === 'color-card'" />
     <StrEncode v-show="curNav === 'str-encode'" />
     <StrDiff v-show="curNav === 'str-diff'" />
     <StrQrcode v-show="curNav === 'str-qrcode'" />
@@ -24,6 +25,7 @@
   import Tail from './View/Tail'
   import SSHEmulator from './View/SSHEmulator'
   import Doc from './View/Doc'
+  import ColorCard from './View/ColorCard'
   import Settings from './View/Settings'
 
   export default {
@@ -37,6 +39,7 @@
       Tail,
       SSHEmulator,
       Doc,
+      ColorCard,
       Settings
     },
     computed: {
