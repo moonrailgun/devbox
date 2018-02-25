@@ -22,7 +22,9 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     height: 721,
     useContentSize: true,
-    width: 1100
+    width: 1100,
+    minWidth: 1100,
+    minHeight: 721
   })
 
   // Menu

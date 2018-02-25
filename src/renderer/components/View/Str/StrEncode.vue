@@ -47,6 +47,21 @@
 
       <el-row :gutter="10">
         <el-col :span="12">
+          <el-form-item label="URI编码">
+            <i class="copy-btn el-icon-document" @click="copy(uriEncodeText)"></i>
+            <el-input type="textarea" v-model="uriEncodeText" disabled></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="URI解码">
+            <i class="copy-btn el-icon-document" @click="copy(uriDecodeText)"></i>
+            <el-input type="textarea" v-model="uriDecodeText" disabled></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+
+      <el-row :gutter="10">
+        <el-col :span="12">
           <el-form-item label="Base64编码">
             <i class="copy-btn el-icon-document" @click="copy(base64EncodeText)"></i>
             <el-input type="textarea" v-model="base64EncodeText" disabled></el-input>
@@ -146,6 +161,12 @@
       },
       utf8DecodeText () {
         return this.oriText && decodeUtf8(this.oriText).toString()
+      },
+      uriEncodeText () {
+        return this.oriText && encodeURI(this.oriText).toString()
+      },
+      uriDecodeText () {
+        return this.oriText && decodeURI(this.oriText).toString()
       },
       base64EncodeText () {
         return this.oriText && Buffer.from(this.oriText).toString('base64')
