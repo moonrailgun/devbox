@@ -3,6 +3,7 @@
     <CodeSnippet v-show="curNav === 'snippet'" />
     <SSHEmulator v-if="curNav === 'term'" />
     <Tail v-show="curNav === 'tail'" />
+    <Http v-show="curNav === 'http'" />
     <Doc v-show="curNav === 'doc'" />
     <ColorCard v-show="curNav === 'color-card'" />
     <StrEncode v-show="curNav === 'str-encode'" />
@@ -27,6 +28,7 @@
   import Doc from './View/Doc'
   import ColorCard from './View/ColorCard'
   import Settings from './View/Settings'
+  import Http from './View/Http'
 
   export default {
     components: {
@@ -38,6 +40,7 @@
       SysPortScan,
       Tail,
       SSHEmulator,
+      Http,
       Doc,
       ColorCard,
       Settings

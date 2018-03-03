@@ -24,7 +24,8 @@ function createWindow () {
     useContentSize: true,
     width: 1100,
     minWidth: 1100,
-    minHeight: 721
+    minHeight: 721,
+    webPreferences: {webSecurity: false}
   })
 
   // Menu
