@@ -23,6 +23,7 @@
         <p>色值:{{selectedColor.val}}</p>
         <p>添加时间:{{selectedColor.createdAt}}</p>
         <p>备注:{{selectedColor.comments}}</p>
+        <el-button type="primary" plain @click="removeColor(selectedColor.index)">移除</el-button>
       </el-col>
     </el-row>
   </div>
@@ -35,12 +36,14 @@
         showAlpha: true,
         pickerColor: '',
         myColors: [],
-        selectedColor: {}
+        selectedColor: {},
+        colorIndex: 1
       }
     },
     methods: {
       addColor () {
         this.myColors.push({
+          index: ++this.colorIndex,
           val: this.pickerColor,
           createdAt: new Date().format('yyyy-MM-dd'),
           comments: ''
@@ -50,6 +53,9 @@
       },
       selectColor (color) {
         this.selectedColor = color
+      },
+      removeColor (index) {
+        // TODO
       }
     }
   }
