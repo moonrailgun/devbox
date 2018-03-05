@@ -1,6 +1,6 @@
 # devbox
 
-> An electron-vue project
+> 一款集成程序员常用软件的工具箱应用
 
 #### Build Setup
 
@@ -13,6 +13,7 @@ npm run dev
 
 # build electron application for production
 npm run build
+# or npm run build:dir
 
 # run unit & end-to-end tests
 npm test
