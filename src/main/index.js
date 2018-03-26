@@ -137,7 +137,6 @@ app.on('activate', () => {
   }
 })
 
-require('./event/tail')
 require('./event/portscan')
 
 /**

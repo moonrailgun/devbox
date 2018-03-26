@@ -1,9 +1,12 @@
 <template>
   <el-row :gutter="4" class="tail-container">
     <el-col :span="18">
-      <table class="logs" cellspacing="0">
-        <tbody ref="logs">
-
+      <table class="logs" cellspacing="0" ref="logs">
+        <tbody>
+          <tr v-for="(log, index) in logs">
+            <td class="from" :data-from="log.name"></td>
+            <td><pre>{{log.message}}</pre></td>
+          </tr>
         </tbody>
       </table>
     </el-col>
@@ -41,45 +44,77 @@
 </template>
 
 <script>
-  import { ipcRenderer } from 'electron'
+  import { Tail } from 'tail'
+  import debounce from 'lodash.debounce'
 
   export default {
     data () {
       return {
         fileList: [],
         isWatching: false,
-        lines: 0
+        lines: 0,
+        logs: [],
+        watchProcess: []
       }
     },
-    mounted () {
-      let logsDOM = this.$refs.logs
-      let tableDOM = logsDOM.parentNode
-      ipcRenderer.on('tail-file-log', (event, name, message) => {
-        this.$set(this.$data, 'lines', this.lines + 1)
-        logsDOM.innerHTML += `<tr><td class="from" data-from='${name}'></td><td><pre>${message}</pre></td></tr>`
-        tableDOM.scrollTop = tableDOM.scrollHeight
-      })
+    updated () {
+      debounce(() => {
+        this.$refs.logs.scrollTop = this.$refs.logs.scrollHeight
+        console.log('scroll to bottom')
+      }, 1000)()
+    },
+    beforeDestroy () {
+      this.unwatch()
+      this.clear()
     },
     methods: {
       watch () {
         console.log('开始监听')
-        ipcRenderer.send('tail-file-watch', this.logfilePath)
-        this.$set(this.$data, 'isWatching', true)
+        this.isWatching = true
+        for (let file of this.fileList) {
+          let { name, path } = file
+          let tail = new Tail(path)
+          tail.on('line', (data) => {
+            this.lines++
+            this.logs.push({
+              name: name,
+              message: data
+            })
+          })
+
+          tail.on('error', (error) => {
+            console.error(error)
+            this.logs.push({
+              name: name,
+              message: 'ERROR: ' + error
+            })
+          })
+
+          this.watchProcess.push({
+            name,
+            path,
+            tail
+          })
+        }
       },
       unwatch () {
-        console.log('停止监听')
-        ipcRenderer.send('tail-file-unwatch', this.logfilePath)
-        this.$set(this.$data, 'isWatching', false)
+        console.log('停止监听所有文件')
+        for (let p of this.watchProcess) {
+          p.tail.unwatch()
+        }
+        this.watchProcess = []
+        this.isWatching = false
       },
       clear () {
-        this.$refs.logs.innerHTML = ''
-        this.$set(this.$data, 'lines', 0)
+        console.log('清空日志')
+        this.logs = []
+        this.lines = 0
       },
       handleChange (file, fileList) {
-        ipcRenderer.send('tail-file-update', fileList.map(item => ({
+        this.fileList = fileList.map(item => ({
           name: item.name,
           path: item.raw.path
-        })))
+        }))
       },
       handleRemove (file, fileList) {
         console.log(file, fileList)
