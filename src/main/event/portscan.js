@@ -9,7 +9,8 @@ function scan (host, start, end, callback) {
   for (var i = start; i <= end; i++) {
     var item = net.connect({
       host: host,
-      port: i
+      port: i,
+      timeout: 30000 // 增加半分钟的超时时间
     }, (function (i) {
         return function () {
           result.push(i)
@@ -33,7 +34,7 @@ function scan (host, start, end, callback) {
 }
 
 ipcMain.on('port-scan', function (event, host, start = 1, end = 65535) {
-  console.log('开始扫描', host, ' | 开始:', start, '结束:', end);
+  console.log('开始扫描: ', host, ' | 端口: ', start, ' ~ ', end);
 
   (function (host, start, end) {
     scan(host, start, end, function (result) {

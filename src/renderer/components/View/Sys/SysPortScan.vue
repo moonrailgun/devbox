@@ -3,7 +3,7 @@
     <p>端口扫描</p>
     <el-input v-model="host" placeholder="请输入主机" :disabled="isScanning"></el-input>
     <el-button type="primary" @click="scan()" :loading="isScanning">{{!isScanning?"开始扫描":"扫描中"}}</el-button>
-    <p v-if="scanResult.host">扫描主机: {{scanResult.host}}</p>
+    <p v-if="scanResult.host" class="tip">扫描主机: {{scanResult.host}} 报告</p>
     <el-table :data="scanResult.data" style="width: 100%" v-if="scanResult.host">
       <el-table-column
         prop="port"
@@ -77,5 +77,8 @@
 <style>
 .sys-portscan > * {
   margin-bottom: 10px;
+}
+.sys-portscan > .tip {
+  color: #737373;
 }
 </style>
