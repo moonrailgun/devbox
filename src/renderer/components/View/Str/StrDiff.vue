@@ -72,6 +72,7 @@ table.diff th {
   color: rgba(27,31,35,0.3);
   background-color: #f3f3f3;
   width: 5%;
+  vertical-align: top;
 }
 table.diff thead th {
   color: rgba(27,31,35,0.3);
@@ -81,6 +82,8 @@ table.diff thead th {
 table.diff td {
   color: #032f62;
   width: 45%;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 table.diff td.empty {
   background-color: #e2e2e2;
