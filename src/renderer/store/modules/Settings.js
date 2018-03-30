@@ -1,5 +1,8 @@
 const state = {
-  settings: {}
+  settings: {
+    tailMaxLine: 1000,
+    menuCollapse: false
+  }
 }
 
 const mutations = {

@@ -46,15 +46,23 @@
 <script>
   import { Tail } from 'tail'
   import debounce from 'lodash.debounce'
+  import { mapState } from 'vuex'
 
   export default {
     data () {
       return {
         fileList: [],
         isWatching: false,
-        lines: 0,
         logs: [],
         watchProcess: []
+      }
+    },
+    computed: {
+      ...mapState({
+        tailMaxLine: state => state.Settings.settings.tailMaxLine || 1000
+      }),
+      lines: function () {
+        return this.logs.length
       }
     },
     updated () {
@@ -69,13 +77,15 @@
     },
     methods: {
       watch () {
-        console.log('开始监听')
+        console.log('开始监听...')
         this.isWatching = true
         for (let file of this.fileList) {
           let { name, path } = file
           let tail = new Tail(path)
           tail.on('line', (data) => {
-            this.lines++
+            if (this.lines >= this.tailMaxLine) {
+              this.logs.shift()
+            }
             this.logs.push({
               name: name,
               message: data
@@ -108,7 +118,6 @@
       clear () {
         console.log('清空日志')
         this.logs = []
-        this.lines = 0
       },
       handleChange (file, fileList) {
         this.fileList = fileList.map(item => ({
