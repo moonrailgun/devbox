@@ -21,7 +21,7 @@ export default {
         this.$message({
           message: '代理服务器已开启, 代理服务器端口号8001, 网页调试端口号8002',
           type: 'success'
-        });
+        })
       }
       this.isRun = true
     },
