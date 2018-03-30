@@ -1,6 +1,6 @@
 const { ipcMain } = require('electron')
 const AnyProxy = require('anyproxy')
-const options = {
+const defaultOptions = {
   port: 8001,
   // rule: require('myRuleModule'),s
   webInterface: {
@@ -12,28 +12,31 @@ const options = {
   wsIntercept: false, // 不开启websocket代理
   silent: false
 }
-const proxyServer = new AnyProxy.ProxyServer(options)
-proxyServer.on('ready', () => {
-  console.log('[AnyProxy]:', 'ready')
-})
-proxyServer.on('error', (e) => {
-  console.log('[AnyProxy]:', e)
-})
 
 let isProxyStarted = false
+let proxyServer = null
 
-ipcMain.on('proxy-server-start', function (event) {
+ipcMain.on('proxy-server-start', function (event, options = null) {
   if (!isProxyStarted) {
+    proxyServer = new AnyProxy.ProxyServer(Object.assign({}, defaultOptions, options))
+    proxyServer.on('ready', () => {
+      console.log('[AnyProxy]:', 'ready')
+    })
+    proxyServer.on('error', (e) => {
+      console.log('[AnyProxy]:', e)
+    })
     proxyServer.start()
+    isProxyStarted = true
   } else {
-    console.log('proxy server has been started!')
+    console.log('[AnyProxy]:', 'proxy server has been started!')
   }
 })
 
 ipcMain.on('proxy-server-stop', function (event) {
   if (isProxyStarted) {
     proxyServer.close()
+    isProxyStarted = false
   } else {
-    console.log('proxy server has been closed!')
+    console.log('[AnyProxy]:', 'proxy server has been closed!')
   }
 })

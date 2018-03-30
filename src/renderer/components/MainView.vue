@@ -4,6 +4,7 @@
     <SSHEmulator v-if="curNav === 'term'" />
     <Tail v-show="curNav === 'tail'" />
     <Http v-show="curNav === 'http'" />
+    <AnyProxy v-show="curNav === 'proxy'" />
     <Doc v-show="curNav === 'doc'" />
     <ColorCard v-show="curNav === 'color-card'" />
     <StrEncode v-show="curNav === 'str-encode'" />
@@ -11,7 +12,7 @@
     <StrQrcode v-show="curNav === 'str-qrcode'" />
     <StrBejson v-show="curNav === 'str-bejson'" />
     <SysPortScan v-show="curNav === 'sys-portscan'" />
-    <Settings v-show="curNav === 'settings'" />
+    <Settings v-if="curNav === 'settings'" />
   </div>
 </template>
 
@@ -29,6 +30,7 @@
   import ColorCard from './View/ColorCard'
   import Settings from './View/Settings'
   import Http from './View/Http'
+  import AnyProxy from './View/AnyProxy'
 
   export default {
     components: {
@@ -41,6 +43,7 @@
       Tail,
       SSHEmulator,
       Http,
+      AnyProxy,
       Doc,
       ColorCard,
       Settings

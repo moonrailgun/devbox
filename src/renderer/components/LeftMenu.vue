@@ -16,6 +16,10 @@
       <i class="el-icon-share"></i>
       <span slot="title">网络请求</span>
     </el-menu-item>
+    <el-menu-item index="proxy">
+      <i class="el-icon-sort"></i>
+      <span slot="title">代理抓包</span>
+    </el-menu-item>
     <el-submenu index="tool">
       <template slot="title">
         <i class="el-icon-menu"></i>
