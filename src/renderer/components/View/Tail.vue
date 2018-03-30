@@ -1,6 +1,6 @@
 <template>
   <el-row :gutter="4" class="tail-container">
-    <el-col :span="18">
+    <el-col :span="isCollapse ? 24 : 18" style="position: relative;">
       <table class="logs" cellspacing="0" ref="logs">
         <tbody>
           <tr v-for="(log, index) in logs">
@@ -9,8 +9,15 @@
           </tr>
         </tbody>
       </table>
+      <div
+        :class="'tail-collapse-btn' + (isCollapse ? ' collapse' : '')"
+        @click="switchCollapse"
+      >
+        <i class="el-icon-caret-right" v-if="!isCollapse"></i>
+        <i class="el-icon-caret-left" v-else></i>
+      </div>
     </el-col>
-    <el-col :span="6">
+    <el-col :span="isCollapse ? 0 : 6">
       <div>
         <p>日志文件监控</p>
         <el-upload
@@ -54,7 +61,8 @@
         fileList: [],
         isWatching: false,
         logs: [],
-        watchProcess: []
+        watchProcess: [],
+        isCollapse: false
       }
     },
     computed: {
@@ -136,6 +144,9 @@
       },
       beforeRemove (file, fileList) {
         return !this.isWatching // this.$confirm(`确定移除 ${file.name}？`)
+      },
+      switchCollapse () {
+        this.isCollapse = !this.isCollapse
       }
     }
   }
@@ -185,5 +196,30 @@
   bottom: 0;
   color: #999;
   width: 25%;
+}
+
+.tail-collapse-btn {
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+  height: 100px;
+  line-height: 100px;
+  border: 1px solid #ccc;
+  right: -15px;
+  width: 18px;
+  cursor: pointer;
+  color: #666;
+}
+
+.tail-collapse-btn:hover {
+  box-shadow: 1px 0 1px 0 #ccc;
+}
+
+.tail-collapse-btn.collapse {
+  right: 2px;
+}
+
+.tail-collapse-btn.collapse:hover{
+  box-shadow: -1px 0 1px 0 #ccc;
 }
 </style>
