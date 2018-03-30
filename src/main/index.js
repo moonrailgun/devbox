@@ -138,6 +138,7 @@ app.on('activate', () => {
 })
 
 require('./event/portscan')
+require('./proxy/')
 
 /**
  * Auto Updater
