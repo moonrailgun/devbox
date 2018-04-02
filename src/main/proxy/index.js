@@ -16,7 +16,7 @@ const defaultOptions = {
 let isProxyStarted = false
 let proxyServer = null
 
-ipcMain.on('proxy-server-start', function (event, options = null) {
+ipcMain.on('proxy-server-start', function (event, options = null, error = null) {
   if (!isProxyStarted) {
     proxyServer = new AnyProxy.ProxyServer(Object.assign({}, defaultOptions, options))
     proxyServer.on('ready', () => {
@@ -24,6 +24,7 @@ ipcMain.on('proxy-server-start', function (event, options = null) {
     })
     proxyServer.on('error', (e) => {
       console.log('[AnyProxy]:', e)
+      error && error(e)
     })
     proxyServer.start()
     isProxyStarted = true
