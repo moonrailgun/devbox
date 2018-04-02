@@ -163,10 +163,10 @@
         return this.oriText && decodeUtf8(this.oriText).toString()
       },
       uriEncodeText () {
-        return this.oriText && encodeURI(this.oriText).toString()
+        return this.oriText && encodeURIComponent(this.oriText).toString()
       },
       uriDecodeText () {
-        return this.oriText && decodeURI(this.oriText).toString()
+        return this.oriText && decodeURIComponent(this.oriText).toString()
       },
       base64EncodeText () {
         return this.oriText && Buffer.from(this.oriText).toString('base64')
