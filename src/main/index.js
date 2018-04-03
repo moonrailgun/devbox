@@ -139,6 +139,7 @@ app.on('activate', () => {
 
 require('./event/portscan')
 require('./proxy/')
+require('./ftp/')
 
 /**
  * Auto Updater
