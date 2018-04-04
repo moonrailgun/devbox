@@ -6,6 +6,7 @@
       :before-close="handleClose">
       <span slot="title" class="snippet-editing-title">
         <el-input v-model="editingName" placeholder="请输入片段名"></el-input>
+        <el-input v-model="editingLanguage" placeholder="请输入语言" :style="{width: '120px'}"></el-input>
       </span>
       <codemirror class="container" v-model="editingCode" :options="cmOptions" ref="code"></codemirror>
       <span slot="footer">
@@ -16,14 +17,14 @@
     <el-row :gutter="5">
       <el-card :body-style="{ padding: '0px' }" v-for="snippet in snippets" :key="snippet.id">
         <div class="snippet-screenshot" :style="{backgroundImage: 'url('+snippet.image+')'}">
-          <span>{{snippet.language}}</span>
+          <span :style="{backgroundColor: getLanguageColor(snippet.language)}" v-if="snippet.language">{{snippet.language}}</span>
         </div>
         <div style="padding: 14px;">
           <p class="snippet-name">{{snippet.name}}</p>
           <div>
             <!-- <time class="time">{{snippet.time}}</time> -->
             <el-button type="text" class="button" @click="remove(snippet.id)">移除</el-button>
-            <el-button type="text" class="button" @click="edit(snippet.id, snippet.name, snippet.code)">编辑</el-button>
+            <el-button type="text" class="button" @click="edit(snippet.id, snippet.name, snippet.code, snippet.language)">编辑</el-button>
             <el-button type="text" class="button" @click="copy(snippet.code)">复制</el-button>
           </div>
         </div>
@@ -43,6 +44,7 @@
 <script>
   import { clipboard } from 'electron'
   import html2canvas from 'html2canvas'
+  import str2color from 'string-to-color'
 
   export default {
     data () {
@@ -58,6 +60,7 @@
         editingId: null,
         editingCode: '',
         editingName: '',
+        editingLanguage: '',
         dialogVisible: false
       }
     },
@@ -76,10 +79,11 @@
         clipboard.writeText(code)
         this.$message({message: '已复制到剪切板', type: 'success', duration: 1000})
       },
-      edit (id, name, code) {
+      edit (id, name, code, language) {
         this.editingId = id
         this.editingCode = code
         this.editingName = name
+        this.editingLanguage = language
         this.dialogVisible = true
       },
       async save () {
@@ -98,7 +102,7 @@
             time: JSON.stringify(new Date()).substr(1, 10),
             code: this.editingCode,
             image,
-            language: 'javascript'// TODO
+            language: this.editingLanguage
           }
           this.snippets.push(pkg)
         } else {
@@ -107,6 +111,7 @@
           snippet.code = this.editingCode
           snippet.image = image
           snippet.time = JSON.stringify(new Date()).substr(1, 10)
+          snippet.language = this.editingLanguage
         }
         this.dialogVisible = false
         this.syncToDb()
@@ -158,6 +163,9 @@
             }
           }
         })
+      },
+      getLanguageColor (language) {
+        return str2color(language)
       }
     }
   }
