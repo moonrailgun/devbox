@@ -37,6 +37,7 @@
       <el-submenu index="sys">
         <span slot="title">系统相关</span>
         <el-menu-item index="sys-portscan">端口扫描</el-menu-item>
+        <el-menu-item index="sys-ftpserver">FTP服务</el-menu-item>
       </el-submenu>
     </el-submenu>
     <el-menu-item index="settings">

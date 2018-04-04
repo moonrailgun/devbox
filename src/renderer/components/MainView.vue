@@ -12,6 +12,7 @@
     <StrQrcode v-show="curNav === 'str-qrcode'" />
     <StrBejson v-show="curNav === 'str-bejson'" />
     <SysPortScan v-show="curNav === 'sys-portscan'" />
+    <FTPServer v-show="curNav === 'sys-ftpserver'" />
     <Settings v-if="curNav === 'settings'" />
   </div>
 </template>
@@ -24,6 +25,7 @@
   import StrQrcode from './View/Str/StrQrcode'
   import StrBejson from './View/Str/StrBejson'
   import SysPortScan from './View/Sys/SysPortScan'
+  import FTPServer from './View/Sys/FTPServer'
   import Tail from './View/Tail'
   import SSHEmulator from './View/SSHEmulator'
   import Doc from './View/Doc'
@@ -40,6 +42,7 @@
       StrQrcode,
       StrBejson,
       SysPortScan,
+      FTPServer,
       Tail,
       SSHEmulator,
       Http,

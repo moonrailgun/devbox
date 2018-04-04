@@ -17,6 +17,7 @@ import store from './store'
 import db from './datastore'
 
 import './utils/common'
+import './assets/global.css'
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios
