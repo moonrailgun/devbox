@@ -6,7 +6,20 @@
       :before-close="handleClose">
       <span slot="title" class="snippet-editing-title">
         <el-input v-model="editingName" placeholder="请输入片段名"></el-input>
-        <el-input v-model="editingLanguage" placeholder="请输入语言" :style="{width: '120px'}"></el-input>
+        <!-- <el-input v-model="editingLanguage" placeholder="请输入语言" :style="{width: '120px'}"></el-input> -->
+        <el-select
+          v-model="editingLanguage"
+          filterable
+          allow-create
+          default-first-option
+          placeholder="请选择代码语言">
+          <el-option
+            v-for="item in languages"
+            :key="item"
+            :label="item"
+            :value="item">
+          </el-option>
+        </el-select>
       </span>
       <codemirror class="container" v-model="editingCode" :options="cmOptions" ref="code"></codemirror>
       <span slot="footer">
@@ -45,6 +58,7 @@
   import { clipboard } from 'electron'
   import html2canvas from 'html2canvas'
   import str2color from 'string-to-color'
+  import languages from '../../utils/language.json'
 
   export default {
     data () {
@@ -61,7 +75,8 @@
         editingCode: '',
         editingName: '',
         editingLanguage: '',
-        dialogVisible: false
+        dialogVisible: false,
+        languages: languages
       }
     },
     mounted () {
