@@ -21,7 +21,8 @@ export default {
         ipcRenderer.send('proxy-server-start')
         this.$notify({
           title: 'AnyProxy',
-          message: '代理服务器已开启, 代理服务器端口号8001, 网页调试端口号8002'
+          message: '代理服务器已开启, 代理服务器端口号8001, 网页调试端口号8002',
+          duration: 10000
         })
       }
       this.isRun = true
