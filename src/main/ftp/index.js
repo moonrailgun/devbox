@@ -6,20 +6,22 @@ const homePath = app.getPath('home')
 
 ipcMain.on('ftp-server-start', function (event, options = undefined, error = null) {
   if (!ftpServer) {
-    ftpServer = new FtpSrv('ftp://0.0.0.0:9876', {
-      options
+    ftpServer = new FtpSrv('ftp://0.0.0.0:8880', {
+      pasv_range: 8881,
+      greeting: ['hello', 'world'],
+      anonymous: true,
+      file_format: 'ep'
     })
     ftpServer.on('login', (data, resolve, reject) => {
       resolve({
-        root: homePath,
-        cwd: homePath
+        root: homePath
       })
     })
     ftpServer.listen().then(() => {
       console.log('ftp server start')
     })
   } else {
-    console.log('ftp 服务 已存在')
+    console.log('ftp server isrunning!')
   }
 })
 
