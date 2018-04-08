@@ -3,7 +3,7 @@ const AnyProxy = require('anyproxy')
 const log = require('electron-log')
 const defaultOptions = {
   port: 8001,
-  // rule: require('myRuleModule'),s
+  // rule: require('myRuleModule'),
   webInterface: {
     enable: true,
     webPort: 8002
@@ -17,15 +17,14 @@ const defaultOptions = {
 let isProxyStarted = false
 let proxyServer = null
 
-ipcMain.on('proxy-server-start', function (event, options = null, error = null) {
+ipcMain.on('proxy-server-start', function (event, options = null) {
   if (!isProxyStarted) {
     proxyServer = new AnyProxy.ProxyServer(Object.assign({}, defaultOptions, options))
     proxyServer.on('ready', () => {
       log.info('[AnyProxy]:', 'ready')
     })
     proxyServer.on('error', (e) => {
-      log.info('[AnyProxy]:', e)
-      error && error(e)
+      log.error('[AnyProxy]:', e)
     })
     proxyServer.start()
     isProxyStarted = true

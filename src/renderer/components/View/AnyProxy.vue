@@ -8,6 +8,7 @@
 
 <script>
 import { ipcRenderer, shell } from 'electron'
+import { mapState } from 'vuex'
 
 export default {
   data () {
@@ -15,13 +16,25 @@ export default {
       isRun: false
     }
   },
+  computed: {
+    ...mapState({
+      proxyServerPort: state => state.Settings.settings.proxyServerPort || 8001,
+      proxyWebPort: state => state.Settings.settings.proxyWebPort || 8002
+    })
+  },
   methods: {
     startProxyServer () {
       if (this.isRun === false) {
-        ipcRenderer.send('proxy-server-start')
+        ipcRenderer.send('proxy-server-start', {
+          port: this.proxyServerPort,
+          webInterface: {
+            enable: true,
+            webPort: this.proxyWebPort
+          }
+        })
         this.$notify({
           title: 'AnyProxy',
-          message: '代理服务器已开启, 代理服务器端口号8001, 网页调试端口号8002',
+          message: `代理服务器已开启, 代理服务器端口号${this.proxyServerPort}, 网页调试端口号${this.proxyWebPort}`,
           duration: 10000
         })
       }
@@ -38,7 +51,7 @@ export default {
       })
     },
     openWebUI () {
-      shell.openExternal('http://localhost:8002')
+      shell.openExternal(`http://localhost:${this.proxyWebPort}`)
     }
   }
 }
