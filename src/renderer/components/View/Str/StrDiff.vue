@@ -84,6 +84,7 @@ table.diff td {
   width: 45%;
   word-wrap: break-word;
   word-break: break-all;
+  vertical-align: top;
 }
 table.diff td.empty {
   background-color: #e2e2e2;
