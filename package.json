@@ -66,6 +66,7 @@
     "lodash.debounce": "^4.0.8",
     "nedb": "^1.8.0",
     "node-pty": "^0.7.4",
+    "port-numbers": "^2.0.26",
     "qrcode": "^1.2.0",
     "string-to-color": "^2.0.0",
     "tail": "^1.2.3",
