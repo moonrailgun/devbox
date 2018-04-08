@@ -1,5 +1,6 @@
 const { ipcMain, app } = require('electron')
 const FtpSrv = require('ftp-srv')
+const log = require('electron-log')
 
 let ftpServer = null
 const homePath = app.getPath('home')
@@ -18,17 +19,17 @@ ipcMain.on('ftp-server-start', function (event, options = undefined, error = nul
       })
     })
     ftpServer.listen().then(() => {
-      console.log('ftp server start')
+      log.info('ftp server start')
     })
   } else {
-    console.log('ftp server isrunning!')
+    log.info('ftp server isrunning!')
   }
 })
 
 ipcMain.on('ftp-server-stop', function (event) {
   if (ftpServer) {
     ftpServer.close().then(() => {
-      console.log('ftp server stop')
+      log.info('ftp server stop')
     })
   }
   ftpServer = null

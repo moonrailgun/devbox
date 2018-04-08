@@ -1,6 +1,7 @@
 'use strict'
 
 import { app, BrowserWindow, Menu } from 'electron'
+import log from 'electron-log'
 
 /**
  * Set `__static` path to static files in production
@@ -140,6 +141,8 @@ app.on('activate', () => {
 require('./event/portscan')
 require('./proxy/')
 require('./ftp/')
+
+log.info('app start completed!')
 
 /**
  * Auto Updater

@@ -1,5 +1,6 @@
 const { ipcMain } = require('electron')
 const AnyProxy = require('anyproxy')
+const log = require('electron-log')
 const defaultOptions = {
   port: 8001,
   // rule: require('myRuleModule'),s
@@ -20,16 +21,16 @@ ipcMain.on('proxy-server-start', function (event, options = null, error = null) 
   if (!isProxyStarted) {
     proxyServer = new AnyProxy.ProxyServer(Object.assign({}, defaultOptions, options))
     proxyServer.on('ready', () => {
-      console.log('[AnyProxy]:', 'ready')
+      log.info('[AnyProxy]:', 'ready')
     })
     proxyServer.on('error', (e) => {
-      console.log('[AnyProxy]:', e)
+      log.info('[AnyProxy]:', e)
       error && error(e)
     })
     proxyServer.start()
     isProxyStarted = true
   } else {
-    console.log('[AnyProxy]:', 'proxy server has been started!')
+    log.info('[AnyProxy]:', 'proxy server has been started!')
   }
 })
 
@@ -38,6 +39,6 @@ ipcMain.on('proxy-server-stop', function (event) {
     proxyServer.close()
     isProxyStarted = false
   } else {
-    console.log('[AnyProxy]:', 'proxy server has been closed!')
+    log.info('[AnyProxy]:', 'proxy server has been closed!')
   }
 })
