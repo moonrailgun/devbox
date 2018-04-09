@@ -9,6 +9,7 @@
     <StrQrcode v-show="curNav === 'str-qrcode'" />
     <StrBejson v-show="curNav === 'str-bejson'" />
     <SysPortScan v-show="curNav === 'sys-portscan'" />
+    <HTTPServer v-show="curNav === 'sys-httpserver'" />
     <FTPServer v-show="curNav === 'sys-ftpserver'" />
     <Settings v-if="curNav === 'settings'" />
   </div>
@@ -22,6 +23,7 @@
   import StrQrcode from './View/Str/StrQrcode'
   import StrBejson from './View/Str/StrBejson'
   import SysPortScan from './View/Sys/SysPortScan'
+  import HTTPServer from './View/Sys/HTTPServer'
   import FTPServer from './View/Sys/FTPServer'
   import Tail from './View/Tail'
   import ColorCard from './View/ColorCard'
@@ -36,6 +38,7 @@
       StrQrcode,
       StrBejson,
       SysPortScan,
+      HTTPServer,
       FTPServer,
       Tail,
       AnyProxy,

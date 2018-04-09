@@ -10,7 +10,6 @@
         如果出现无法执行<code>LIST</code>命令的情况，请尝试手动切换到主动模式
       </p>
     </div>
-
   </div>
 </template>
 
