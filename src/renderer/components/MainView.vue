@@ -1,11 +1,8 @@
 <template>
   <div class="main-view">
     <CodeSnippet v-show="curNav === 'snippet'" />
-    <SSHEmulator v-if="curNav === 'term'" />
     <Tail v-show="curNav === 'tail'" />
-    <Http v-show="curNav === 'http'" />
     <AnyProxy v-show="curNav === 'proxy'" />
-    <Doc v-show="curNav === 'doc'" />
     <ColorCard v-show="curNav === 'color-card'" />
     <StrEncode v-show="curNav === 'str-encode'" />
     <StrDiff v-show="curNav === 'str-diff'" />
@@ -27,11 +24,8 @@
   import SysPortScan from './View/Sys/SysPortScan'
   import FTPServer from './View/Sys/FTPServer'
   import Tail from './View/Tail'
-  import SSHEmulator from './View/SSHEmulator'
-  import Doc from './View/Doc'
   import ColorCard from './View/ColorCard'
   import Settings from './View/Settings'
-  import Http from './View/Http'
   import AnyProxy from './View/AnyProxy'
 
   export default {
@@ -44,10 +38,7 @@
       SysPortScan,
       FTPServer,
       Tail,
-      SSHEmulator,
-      Http,
       AnyProxy,
-      Doc,
       ColorCard,
       Settings
     },

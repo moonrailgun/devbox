@@ -4,17 +4,9 @@
       <i class="el-icon-document"></i>
       <span slot="title">代码片段</span>
     </el-menu-item>
-    <el-menu-item index="term">
-      <i class="el-icon-edit"></i>
-      <span slot="title">命令终端</span>
-    </el-menu-item>
     <el-menu-item index="tail">
       <i class="el-icon-view"></i>
       <span slot="title">日志监控</span>
-    </el-menu-item>
-    <el-menu-item index="http">
-      <i class="el-icon-share"></i>
-      <span slot="title">网络请求</span>
     </el-menu-item>
     <el-menu-item index="proxy">
       <i class="el-icon-sort"></i>
@@ -25,7 +17,6 @@
         <i class="el-icon-menu"></i>
         <span slot="title">常用工具</span>
       </template>
-      <el-menu-item index="doc">文档速查</el-menu-item>
       <el-menu-item index="color-card">取色卡</el-menu-item>
       <el-submenu index="str">
         <span slot="title">文本处理</span>
