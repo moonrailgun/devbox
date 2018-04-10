@@ -30,16 +30,24 @@ export default {
   },
   methods: {
     startHTTPServer () {
-      if (!this.info.rootDir) {
-        this.$notify({
-          title: 'HTTPServer',
-          message: 'HTTP服务器启动失败, 请选择目录'
-        })
+      // if (!this.info.rootDir) {
+      //   this.$notify({title: 'HTTPServer', message: 'HTTP服务器启动失败, 请选择目录'})
+      //   return
+      // }
+      let port = Number(this.info.port)
+      if (!port) {
+        this.$notify({title: 'HTTPServer', message: 'HTTP服务器启动失败, 请选择端口号'})
+        return
+      }
+      if (!(port >= 1 && port <= 65535)) {
+        this.$notify({title: 'HTTPServer', message: 'HTTP服务器启动失败, 端口必须在1~65535之间'})
         return
       }
 
       if (!this.isRun) {
-        ipcRenderer.send('http-server-start')
+        ipcRenderer.send('http-server-start', this.info.port, {
+          root: this.info.rootDir
+        })
         this.$notify({
           title: 'HTTPServer',
           message: `HTTP服务器已开启, 端口号${this.info.port}`,

@@ -140,6 +140,7 @@ app.on('activate', () => {
 
 require('./event/portscan')
 require('./proxy/')
+require('./http/')
 require('./ftp/')
 
 log.info('app start completed!')
