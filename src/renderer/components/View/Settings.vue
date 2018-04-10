@@ -7,8 +7,12 @@
       <el-input-number v-model="tailMaxLine" :min="100" :step="100" label="日志监控缓存最大显示行数"></el-input-number>
     </el-form-item>
     <el-form-item label="代理服务端口">
-      <el-input class="inline-input" v-model="proxyServerPort" placeholder="代理服务器监听端口,默认为8001"></el-input>
-      <el-input class="inline-input" v-model="proxyWebPort" placeholder="代理服务器网页端口,默认为8002"></el-input>
+      <el-input class="inline-input" v-model="proxyServerPort" placeholder="代理服务器监听端口,默认为8001">
+        <template slot="prepend">代理服务</template>
+      </el-input>
+      <el-input class="inline-input" v-model="proxyWebPort" placeholder="代理服务器网页端口,默认为8002">
+        <template slot="prepend">网页服务</template>
+      </el-input>
     </el-form-item>
     <el-form-item>
       <el-button @click="exportSettings">导出配置</el-button>
@@ -62,7 +66,7 @@
 
 <style>
 .inline-input {
-  display: inline-block;
+  /* display: inline-block; */
   width: 260px;
 }
 </style>
