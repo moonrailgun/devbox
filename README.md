@@ -2,6 +2,9 @@
 
 > 一款集成程序员常用软件的工具箱应用
 
+[![Release](https://img.shields.io/github/release/moonrailgun/devbox.svg)](https://github.com/moonrailgun/devbox/releases)
+[![Downloads](https://img.shields.io/github/downloads/moonrailgun/devbox/total.svg)](https://github.com/moonrailgun/devbox/releases)
+
 #### Build Setup
 
 ``` bash
