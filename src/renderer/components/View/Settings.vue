@@ -16,11 +16,16 @@
     </el-form-item>
     <el-form-item>
       <el-button @click="exportSettings">导出配置</el-button>
+      <el-button @click="importSettings">导入配置</el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script>
+  import { remote } from 'electron'
+  import fs from 'fs-extra'
+  import log from 'electron-log'
+
   export default {
     computed: {
       menuCollapse: {
@@ -58,7 +63,34 @@
     },
     methods: {
       exportSettings () {
-        console.log('TODO!')
+        let settings = JSON.parse(JSON.stringify(this.$store.state.Settings.settings))
+        let filepath = remote.dialog.showSaveDialog({
+          defaultPath: 'devbox.settings.json'
+        })
+        if (filepath) {
+          log.info('[Settings]', 'Export settings:', settings)
+          fs.writeJson(filepath, settings)
+        }
+      },
+      importSettings () {
+        let filepath = remote.dialog.showOpenDialog({
+          filters: [
+            {name: '配置文件', extensions: ['json']}
+          ],
+          properties: ['openFile']
+        })
+        filepath = filepath[0]
+        if (filepath) {
+          fs.readJson(filepath)
+            .then(packageObj => {
+              log.info('[Settings]', 'Import settings:', packageObj)
+              this.$store.dispatch('modifySettings', packageObj)
+            })
+            .catch(err => {
+              log.error('[Settings]', 'Import settings error:', err)
+              this.$message.error(err)
+            })
+        }
       }
     }
   }
