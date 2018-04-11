@@ -4,6 +4,10 @@
       <i class="el-icon-document"></i>
       <span slot="title">代码片段</span>
     </el-menu-item>
+    <el-menu-item index="exec">
+      <i class="el-icon-edit"></i>
+      <span slot="title">命令脚本</span>
+    </el-menu-item>
     <el-menu-item index="tail">
       <i class="el-icon-view"></i>
       <span slot="title">日志监控</span>

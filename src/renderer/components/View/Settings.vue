@@ -15,8 +15,8 @@
       </el-input>
     </el-form-item>
     <el-form-item>
-      <el-button @click="exportSettings">导出配置</el-button>
-      <el-button @click="importSettings">导入配置</el-button>
+      <el-button @click="exportSettings" icon="el-icon-upload2">导出配置</el-button>
+      <el-button @click="importSettings" icon="el-icon-download">导入配置</el-button>
     </el-form-item>
   </el-form>
 </template>

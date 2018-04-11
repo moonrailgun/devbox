@@ -1,6 +1,7 @@
 <template>
   <div class="main-view">
     <CodeSnippet v-show="curNav === 'snippet'" />
+    <Exec v-show="curNav === 'exec'" />
     <Tail v-show="curNav === 'tail'" />
     <AnyProxy v-show="curNav === 'proxy'" />
     <ColorCard v-show="curNav === 'color-card'" />
@@ -18,6 +19,7 @@
 <script>
   import { mapState } from 'vuex'
   import CodeSnippet from './View/CodeSnippet'
+  import Exec from './View/Exec'
   import StrEncode from './View/Str/StrEncode'
   import StrDiff from './View/Str/StrDiff'
   import StrQrcode from './View/Str/StrQrcode'
@@ -33,6 +35,7 @@
   export default {
     components: {
       CodeSnippet,
+      Exec,
       StrEncode,
       StrDiff,
       StrQrcode,
