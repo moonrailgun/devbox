@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
-  modules: ['Settings']
+  modules: ['Settings', 'Exec']
 })
 
 export default new Vuex.Store({

@@ -24,7 +24,7 @@
         <el-tab-pane label="变量配置">
           <p>配置变量默认值, 可为空</p>
           <el-form label-width="80px">
-            <el-form-item :label="evar" v-for="evar in editingVariables">
+            <el-form-item :label="evar" v-for="evar in editingVariables" :key="evar">
               <el-input v-model="editing.default[evar]" :placeholder="`请输入变量${evar}默认值`"></el-input>
             </el-form-item>
           </el-form>
@@ -42,7 +42,7 @@
       <el-button type="primary" icon="el-icon-plus" plain @click="dialogVisible = true">添加命令</el-button>
     </el-row>
     <el-row class="scripts">
-      <div class="item" v-for="(s, i) in scripts">
+      <div class="item" v-for="(s, i) in scripts" :key="JSON.stringify(s)+i">
         <div class="code"><pre>{{s.script}}</pre></div>
         <div class="actions">
           <el-button type="success" size="mini" icon="el-icon-caret-right" round @click="runScript(s)">运行</el-button>
@@ -55,7 +55,7 @@
         </div>
         <el-collapse-transition>
           <div v-show="isShowPanelIndex === i">
-            <div v-for="v in s.variables">
+            <div v-for="v in s.variables" :key="v">
               <div class="var-name">{{v}}</div>
               <el-input :placeholder="s.default[v]" size="mini" v-model="s.values[v]"></el-input>
             </div>
@@ -80,7 +80,7 @@ export default {
         script: 'echo "hello world"',
         default: {}
       },
-      scripts: [],
+      // scripts: [],
       isShowPanelIndex: -1,
       isShowShellLog: false,
       shellLog: ''
@@ -92,14 +92,23 @@ export default {
       let vars = script.match(/\${.+?}/g) || []
       vars = vars.map(s => s.slice(2, -1))
       return vars
+    },
+    scripts: {
+      get () {
+        return this.$store.state.Exec.scripts || []
+      },
+      set (value) {
+        this.$store.dispatch('modifyExecScripts', value)
+      }
     }
   },
   methods: {
     addScript () {
-      this.scripts.push(Object.assign({}, {
+      let newScripts = this.scripts.concat(Object.assign({}, {
         variables: this.editingVariables,
         values: {}
       }, this.editing))
+      this.scripts = newScripts
       this.dialogVisible = false
     },
     runScript (scriptData) {
