@@ -52,6 +52,14 @@
             @click="isShowPanelIndex === i ? isShowPanelIndex = -1 : isShowPanelIndex = i"
             round
           >展开</el-button>
+          <el-dropdown trigger="click" @command="(command) => command()">
+            <span class="el-dropdown-link">
+              <el-button type="primary" icon="el-icon-more" size="mini" circle></el-button>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item :command="() => removeScript(i)">删除</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
         <el-collapse-transition>
           <div v-show="isShowPanelIndex === i">
@@ -77,8 +85,10 @@ export default {
       dialogVisible: false,
       editing: {
         cwd: './',
-        script: 'echo "hello world"',
-        default: {}
+        script: 'echo "Hello ${name}!"', // eslint-disable-line
+        default: {
+          name: 'World'
+        }
       },
       // scripts: [],
       isShowPanelIndex: -1,
@@ -98,7 +108,7 @@ export default {
         return this.$store.state.Exec.scripts || []
       },
       set (value) {
-        this.$store.dispatch('modifyExecScripts', value)
+        this.$store.dispatch('modifyExecScripts', Object.assign([], value))
       }
     }
   },
@@ -119,6 +129,7 @@ export default {
       })
       log.info('[exec shell]', script)
       this.showShellLog(script, scriptData.cwd)
+      this.scripts = this.scripts // 更新一下vuex中的脚本内容(自动保存)
     },
     showShellLog (script, cwd) {
       this.isShowShellLog = true
@@ -126,6 +137,11 @@ export default {
       execa.shell(script, { cwd }).then(result => {
         this.shellLog += result.stdout
       })
+    },
+    removeScript (i) {
+      let scripts = JSON.parse(JSON.stringify(this.scripts))
+      scripts.splice(i, 1)
+      this.scripts = scripts
     }
   }
 }
@@ -165,6 +181,10 @@ export default {
   position: absolute;
   right: 10px;
   bottom: 10px;
+}
+
+.exec .item .actions .el-button--mini.is-circle{
+  padding: 7px;
 }
 
 .exec .scripts .item:hover {
