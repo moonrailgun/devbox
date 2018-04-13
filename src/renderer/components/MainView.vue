@@ -9,6 +9,7 @@
     <StrDiff v-show="curNav === 'str-diff'" />
     <StrQrcode v-show="curNav === 'str-qrcode'" />
     <StrBejson v-show="curNav === 'str-bejson'" />
+    <SysProcess v-show="curNav === 'sys-process'" />
     <SysPortScan v-show="curNav === 'sys-portscan'" />
     <HTTPServer v-show="curNav === 'sys-httpserver'" />
     <FTPServer v-show="curNav === 'sys-ftpserver'" />
@@ -24,6 +25,7 @@
   import StrDiff from './View/Str/StrDiff'
   import StrQrcode from './View/Str/StrQrcode'
   import StrBejson from './View/Str/StrBejson'
+  import SysProcess from './View/Sys/SysProcess'
   import SysPortScan from './View/Sys/SysPortScan'
   import HTTPServer from './View/Sys/HTTPServer'
   import FTPServer from './View/Sys/FTPServer'
@@ -40,6 +42,7 @@
       StrDiff,
       StrQrcode,
       StrBejson,
+      SysProcess,
       SysPortScan,
       HTTPServer,
       FTPServer,
