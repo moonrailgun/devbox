@@ -4,7 +4,7 @@
     <Exec v-show="curNav === 'exec'" />
     <Tail v-show="curNav === 'tail'" />
     <AnyProxy v-show="curNav === 'proxy'" />
-    <ColorCard v-show="curNav === 'color-card'" />
+    <!-- <ColorCard v-show="curNav === 'color-card'" /> -->
     <StrEncode v-show="curNav === 'str-encode'" />
     <StrDiff v-show="curNav === 'str-diff'" />
     <StrQrcode v-show="curNav === 'str-qrcode'" />
@@ -30,7 +30,7 @@
   import HTTPServer from './View/Sys/HTTPServer'
   import FTPServer from './View/Sys/FTPServer'
   import Tail from './View/Tail'
-  import ColorCard from './View/ColorCard'
+  // import ColorCard from './View/ColorCard'
   import Settings from './View/Settings'
   import AnyProxy from './View/AnyProxy'
 
@@ -48,7 +48,7 @@
       FTPServer,
       Tail,
       AnyProxy,
-      ColorCard,
+      // ColorCard,
       Settings
     },
     computed: {
