@@ -7,7 +7,8 @@ const homePath = app.getPath('home')
 
 ipcMain.on('ftp-server-start', function (event, options = undefined, error = null) {
   if (!ftpServer) {
-    ftpServer = new FtpSrv('ftp://0.0.0.0:8880', {
+    let port = options.port || 8880
+    ftpServer = new FtpSrv(`ftp://0.0.0.0:${port}`, {
       pasv_range: 8881,
       greeting: ['hello', 'world'],
       anonymous: true,
