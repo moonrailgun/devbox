@@ -40,6 +40,7 @@
 
     <el-row>
       <el-button type="primary" icon="el-icon-plus" plain @click="dialogVisible = true">添加命令</el-button>
+      <el-button type="success" plain @click="saveScript">保存</el-button>
     </el-row>
     <el-row class="scripts">
       <div class="item" v-for="(s, i) in scripts" :key="JSON.stringify(s)+i">
@@ -65,7 +66,7 @@
           <div v-show="isShowPanelIndex === i">
             <div v-for="v in s.variables" :key="v">
               <div class="var-name">{{v}}</div>
-              <el-input :placeholder="s.default[v]" size="mini" v-model="s.values[v]"></el-input>
+              <el-input :placeholder="s.default[v]" size="mini" :value="s.values[v]" @change="s.values[v] = $event"></el-input>
             </div>
           </div>
         </el-collapse-transition>
@@ -90,7 +91,7 @@ export default {
           name: 'World'
         }
       },
-      // scripts: [],
+      scripts: this.$store.state.Exec.scripts || [],
       isShowPanelIndex: -1,
       isShowShellLog: false,
       shellLog: ''
@@ -102,23 +103,18 @@ export default {
       let vars = script.match(/\${.+?}/g) || []
       vars = vars.map(s => s.slice(2, -1))
       return vars
-    },
-    scripts: {
-      get () {
-        return this.$store.state.Exec.scripts || []
-      },
-      set (value) {
-        this.$store.dispatch('modifyExecScripts', Object.assign([], value))
-      }
     }
   },
   methods: {
     addScript () {
-      let newScripts = this.scripts.concat(Object.assign({}, {
+      let values = {}
+      this.editingVariables.forEach(function (v) {
+        values[v] = ''
+      })
+      this.scripts = this.scripts.concat(Object.assign({}, {
         variables: this.editingVariables,
-        values: {}
+        values
       }, this.editing))
-      this.scripts = newScripts
       this.dialogVisible = false
     },
     runScript (scriptData) {
@@ -142,6 +138,17 @@ export default {
       let scripts = JSON.parse(JSON.stringify(this.scripts))
       scripts.splice(i, 1)
       this.scripts = scripts
+      this.saveScript(true)
+    },
+    saveScript (slient = false) {
+      log.info('[exec shell]', 'save script', this.scripts)
+      this.$store.dispatch('modifyExecScripts', Object.assign([], this.scripts))
+      if (!slient) {
+        this.$notify({
+          message: '保存成功',
+          type: 'success'
+        })
+      }
     }
   }
 }
