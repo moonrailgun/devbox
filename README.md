@@ -4,6 +4,7 @@
 
 [![Release](https://img.shields.io/github/release/moonrailgun/devbox.svg)](https://github.com/moonrailgun/devbox/releases)
 [![Downloads](https://img.shields.io/github/downloads/moonrailgun/devbox/total.svg)](https://github.com/moonrailgun/devbox/releases)
+[![Build status](https://ci.appveyor.com/api/projects/status/ygyjp75eg9tfruxw?svg=true)](https://ci.appveyor.com/project/moonrailgun/devbox)
 
 #### Build Setup
 
