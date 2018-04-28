@@ -1,9 +1,3 @@
-<style>
-.markdown-body img {
-  box-shadow: 0 0 4px 0px #ccc;
-}
-</style>
-
 # devbox
 
 > 一款集成程序员常用软件的工具箱应用
@@ -165,3 +159,11 @@ npm run lint
 ---
 
 This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+
+<div>
+<style>
+.markdown-body img {
+  box-shadow: 0 0 4px 0px #ccc;
+}
+</style>
+</div>
