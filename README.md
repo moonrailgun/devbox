@@ -1,3 +1,9 @@
+<style>
+.markdown-body img {
+  box-shadow: 0 0 4px 0px #ccc;
+}
+</style>
+
 # devbox
 
 > 一款集成程序员常用软件的工具箱应用
