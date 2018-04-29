@@ -6,7 +6,7 @@
 [![Downloads](https://img.shields.io/github/downloads/moonrailgun/devbox/total.svg)](https://github.com/moonrailgun/devbox/releases)
 [![Build status](https://ci.appveyor.com/api/projects/status/ygyjp75eg9tfruxw?svg=true)](https://ci.appveyor.com/project/moonrailgun/devbox)
 
-[下载](https://github.com/moonrailgun/devbox/releases)
+[稳定版下载](https://github.com/moonrailgun/devbox/releases)
 
 ## 功能模块
 
