@@ -6,6 +6,8 @@
 [![Downloads](https://img.shields.io/github/downloads/moonrailgun/devbox/total.svg)](https://github.com/moonrailgun/devbox/releases)
 [![Build status](https://ci.appveyor.com/api/projects/status/ygyjp75eg9tfruxw?svg=true)](https://ci.appveyor.com/project/moonrailgun/devbox)
 
+[稳定版下载](https://github.com/moonrailgun/devbox/releases)
+
 ## 功能模块
 
 - [x] [代码片段](#代码片段)
@@ -146,12 +148,12 @@ npm run lint
 ![](./doc/11.png)
 
 #### HTTP服务
-开放一个简易的静态http服务
+开放一个简易的静态http服务, 用于局域网快速共享前端网页。但因为没有解释器所以不能运行动态脚本  
 
 ![](./doc/12.png)
 
 #### FTP服务
-开放一个简易的ftp服务  
+开放一个简易的ftp服务,用于局域网快速共享文件  
 如果无法正常列出目录, 请尝试手动指定为主动模式
 
 ![](./doc/13.png)
