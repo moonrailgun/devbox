@@ -1,7 +1,7 @@
 <template>
   <div class="sys-portscan">
     <p>端口扫描</p>
-    <el-input v-model="host" placeholder="请输入主机" :disabled="isScanning"></el-input>
+    <el-input v-model="host" placeholder="请输入主机" :disabled="isScanning" @keyup.enter="scan"></el-input>
     <p class="tip">输入address格式扫描该地址全端口，输入address:port扫描该地址固定端口</p>
     <el-button type="primary" @click="scan()" :loading="isScanning">{{!isScanning?"开始扫描":"扫描中"}}</el-button>
     <p v-if="scanResult.host" class="tip">扫描主机: {{scanResult.host}} 报告</p>
